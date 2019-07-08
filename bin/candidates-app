@@ -1,0 +1,4 @@
+#!usr/bin/env ruby
+
+reqiure_relative "../lib/environment"
+
