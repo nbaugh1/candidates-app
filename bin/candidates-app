@@ -3,4 +3,4 @@
 require_relative "../lib/environment"
 
 Dems2020::Scraper.make_candidates
-Dems2020::Candidate.find_by_name("Tim")
+Dems2020::Cli.list_candidates
