@@ -1,12 +1,12 @@
 class Dems2020::Candidate
-    attr_accessor :name, :info_page :quote, :summary
+    attr_accessor :name, :info_page, :quote, :summary
 
     @@all = []
 
     def initialize (name = nil, info_page = nil)
         @@all << self
         @name = name
-        @info_page = info_page_url
+        @info_page = info_page
     end
 
     def self.all

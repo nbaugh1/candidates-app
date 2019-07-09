@@ -7,7 +7,8 @@ class Dems2020::Scraper
     def self.make_candidates
         self.get_page.css("div.mobile-columns ul li b a").each do |candidate|
             name = candidate.text
-            Dems2020::Candidate.new(name)
+            info_page_url = candidate.attribute('href').value
+            Dems2020::Candidate.new(name, info_page_url)
         end
     end
 
