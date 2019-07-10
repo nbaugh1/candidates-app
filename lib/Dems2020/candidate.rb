@@ -22,5 +22,9 @@ class Dems2020::Candidate
             puts "Candidate not found."
         end
     end
+
+    def self.find_by_index(input_number)
+        Dems2020::Candidate.all[input_number - 1]
+    end
 end
 
