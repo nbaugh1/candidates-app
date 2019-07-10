@@ -20,7 +20,7 @@ class Dems2020::Cli
         puts ""
         puts "----------#{selected_candidate.name}----------"
         puts ""
-        puts "The following is a quote from '#{selected_candidate.name}' explaining thier reason for running for president:"
+        puts "The following is a quote from #{selected_candidate.name} explaining thier reason for running for president:"
         puts ""
         puts "#{selected_candidate.quote}"
         puts " - #{selected_candidate.name}"
@@ -37,7 +37,7 @@ class Dems2020::Cli
             back_to_list_or_exit = gets.strip
                 if back_to_list_or_exit == "list"
                     start
-                else back_to_list_or_exit == "exit"
+                else
                     puts "Thanks! Goodbye"
                     exit
                 end
