@@ -4,4 +4,4 @@ require_relative "../lib/environment"
 
 Dems2020::Scraper.make_candidates
 Dems2020::Scraper.add_campaign_info
-Dems2020::Cli.start
+Dems2020::Scraper.add_candidate_news

@@ -21,6 +21,15 @@ class Dems2020::Scraper
         end
     end
 
+    def self.add_candidate_news
+        Dems2020::Candidate.all.each do |candidate|
+            candidate_info_page = Nokogiri::HTML(open("#{BASE_URL}#{candidate.info_page_url}"))
+            candidate.news = candidate_info_page.css("li.panel ul")[1].text
+        end
+        binding.pry
+    end
+        
+
 
 end
     
