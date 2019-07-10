@@ -16,14 +16,6 @@ class Dems2020::Candidate
         @@all
     end
 
-    def self.find_by_name(name)
-        if self.all.detect {|s| s.name == name}
-            puts name
-        else
-            puts "Candidate not found."
-        end
-    end
-
     def self.find_by_index(input_number)
         Dems2020::Candidate.all[input_number - 1]
     end
