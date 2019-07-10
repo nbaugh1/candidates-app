@@ -1,5 +1,7 @@
 class Dems2020::Cli
 
+    @@selected_candidate = nil
+
     def self.list_candidates
         Dems2020::Candidate.all.each_with_index do |candidate, index|
             puts "#{index + 1}. #{candidate.name}"
@@ -12,50 +14,70 @@ class Dems2020::Cli
         puts ""
         puts ""
         puts "2020 DEMOCRATIC CANDIDATES FOR PRESIDENT"
+        puts ""
         puts "========================================"
         Dems2020::Cli.list_candidates
+        puts "========================================"
+        puts ""
         puts "Please enter the number of the candidate which you like to learn more about: "
+        get_candidate
+        print_candidate_info
+        list_or_exit
+    end
+
+    def self.get_candidate
         input_number = gets.to_i 
-        selected_candidate = Dems2020::Candidate.find_by_index(input_number)
+        @@selected_candidate = Dems2020::Candidate.find_by_index(input_number)
+    end
+
+    def self.list_or_exit
         puts ""
+        puts "================================================================"
         puts ""
-        puts ""
-        puts "----------#{selected_candidate.name}----------"
-        puts ""
-        puts "The following is a quote from #{selected_candidate.name} explaining thier reason for running for president:"
-        puts ""
-        puts "'#{selected_candidate.quote}'"
-        puts " - #{selected_candidate.name}"
-        puts ""
-        puts "For a summary of #{selected_candidate.name}'s campaign, Enter 'info'"
-        puts "For the most recent news about #{selected_candidate.name}, Enter 'news'"
-        second_input = gets.strip
-        if second_input == "info"
-            puts "===================================="
-            puts ""
-            puts selected_candidate.summary
-            puts ""
-            puts ""
-            puts "Enter 'list' to return to the candidate list, or enter 'exit' to exit: "
-            back_to_list_or_exit = gets.strip
-                if back_to_list_or_exit == "list"
-                    start
-                else
-                    puts "Thanks! Goodbye"
-                    exit
-                end
-        elsif second_input == "news"
-            puts selected_candidate.news
-            puts "Enter 'list' to return to the candidate list, or enter 'exit' to exit: "
-            if back_to_list_or_exit == "list"
-                start
-            else
-                puts "Thanks! Goodbye"
-                exit
-            end
-        else
+        puts "To return to the candidate list enter 'list'"
+        puts "To exit enter 'exit'"
+        input = gets.strip
+        if input == 'list'
             start
+        elsif input == 'exit'
+            puts "Thanks! Goodbye"
+        else
+            puts "Sorry, I didn't understand that"
+            list_or_exit
         end
     end
+
+    def self.print_candidate_info
+        system 'clear'
+        puts ""
+        puts ""
+        puts "You have chosen to learn more about -#{@@selected_candidate.name}-"
+        puts "================================================================"
+        puts ""
+        puts "#{@@selected_candidate.name}'s reason for running for president in 2020:"
+        puts ""
+        puts "'#{@@selected_candidate.quote}' -#{@@selected_candidate.name}"
+        puts ""
+        puts "================================================================"
+        puts ""
+        puts "Summary of #{@@selected_candidate.name}'s campaign platform and experience:"
+        puts ""
+        puts @@selected_candidate.summary
+        puts ""
+        puts "================================================================"
+        puts ""
+        puts "Recent news about #{@@selected_candidate.name}:"
+        puts ""
+        puts @@selected_candidate.news1
+        puts ""
+        puts @@selected_candidate.news2
+        puts ""
+        puts @@selected_candidate.news3
+        
+
+    end
+
+
+
 
 end
