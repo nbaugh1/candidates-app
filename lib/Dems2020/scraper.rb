@@ -18,9 +18,10 @@ class Dems2020::Scraper
             candidate_info_page = Nokogiri::HTML(open("#{BASE_URL}#{candidate.info_page_url}"))
             candidate.quote = candidate_info_page.css("td")[3].text
             candidate.summary = candidate_info_page.css("p")[9..11].text
-            candidate.news1 = candidate_info_page.css("li.panel ul")[1].text
-            candidate.news2 = candidate_info_page.css("li.panel ul")[2].text
-            candidate.news3 = candidate_info_page.css("li.panel ul")[3].text
+            candidate.news1 = candidate_info_page.css("li.panel ul")[0].text
+            candidate.news2 = candidate_info_page.css("li.panel ul")[1].text
+            candidate.news3 = candidate_info_page.css("li.panel ul")[2].text
+            binding.pry
         end
     end
 end
