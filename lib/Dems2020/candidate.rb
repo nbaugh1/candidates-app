@@ -15,15 +15,9 @@ class Dems2020::Candidate
     end
 
     def self.make_candidates
-        Dems2020::Scraper.name_list_page.css("div.mobile-columns ul li b a").each do |candidate|
+        Dems2020::Scraper.scrape_names.css("div.mobile-columns ul li b a").each do |candidate|
             self.new(candidate.text, candidate.attribute('href').value)
         end
-    end
-
-    
-
-    def self.all
-        @@all
     end
 
     def self.selected_candidate(input_number)
@@ -32,12 +26,15 @@ class Dems2020::Candidate
 
     def self.add_candidate_info(candidate)
         candidate_info_page = Dems2020::Scraper.scrape_profile_page(candidate.url)
-        #Nokogiri::HTML(open("#{BASE_URL}#{candidate.info_page_url}"))
-            candidate.quote = candidate_info_page.css("td")[3].text
-            candidate.summary = candidate_info_page.css("p")[9..11].text
-            candidate.news1 = candidate_info_page.css("li.panel ul")[0].text
-            candidate.news2 = candidate_info_page.css("li.panel ul")[1].text
-            candidate.news3 = candidate_info_page.css("li.panel ul")[2].text
+        candidate.quote = candidate_info_page.css("td")[3].text
+        candidate.summary = candidate_info_page.css("p")[9..11].text
+        candidate.news1 = candidate_info_page.css("li.panel ul")[0].text
+        candidate.news2 = candidate_info_page.css("li.panel ul")[1].text
+        candidate.news3 = candidate_info_page.css("li.panel ul")[2].text
+    end
+
+    def self.all
+        @@all
     end
 end
 

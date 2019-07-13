@@ -2,9 +2,7 @@ class Dems2020::CLI
     @@selected_candidate = nil
 
     def self.run
-        #Dems2020::Scraper.scrape_names_and_profile_pages
         Dems2020::Candidate.make_candidates
-        #Dems2020::Scraper.add_campaign_info
         start
     end
 
