@@ -2,12 +2,11 @@ class Dems2020::Scraper
 
     BASE_URL = "https://ballotpedia.org"
     
-    
     def self.name_list_page
         Nokogiri::HTML(open("#{BASE_URL}/Democratic_presidential_nomination,_2020"))
     end
 
-    def self.make_candidates
+    def self.scrape_names_and_profile_pages
         name_list_page.css("div.mobile-columns ul li b a").each do |candidate|
             Dems2020::Candidate.new(candidate.text, candidate.attribute('href').value)
         end
@@ -21,7 +20,6 @@ class Dems2020::Scraper
             candidate.news1 = candidate_info_page.css("li.panel ul")[0].text
             candidate.news2 = candidate_info_page.css("li.panel ul")[1].text
             candidate.news3 = candidate_info_page.css("li.panel ul")[2].text
-            binding.pry
         end
     end
 end

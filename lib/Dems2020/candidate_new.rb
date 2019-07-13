@@ -1,4 +1,4 @@
-class Dems2020::Candidate
+class Dems2020::Candidate_new
     attr_accessor :name, :info_page_url, :quote, :summary, :news1, :news2, :news3
 
     @@all = []
@@ -14,6 +14,15 @@ class Dems2020::Candidate
         @news3 = news3
     end
 
+    def self.make_candidates
+        Dems2020::Scraper.name_list_page.css("div.mobile-columns ul li b a").each do |candidate|
+            self.new(candidate.text, candidate.attribute('href').value)
+        end
+    end
+    
+    
+    
+    
     def self.all
         @@all
     end

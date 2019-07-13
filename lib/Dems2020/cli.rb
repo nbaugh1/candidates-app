@@ -1,14 +1,12 @@
-class Dems2020::Cli
-
+class Dems2020::CLI
     @@selected_candidate = nil
 
-    def self.list_candidates
-        Dems2020::Candidate.all.each_with_index do |candidate, index|
-            puts "#{index + 1}. #{candidate.name}"
-            
-        end
+    def self.run
+        Dems2020::Scraper.scrape_names_and_profile_pages
+        Dems2020::Scraper.add_campaign_info
+        start
     end
-    
+
     def self.start
         system 'clear'
         puts ""
@@ -16,17 +14,24 @@ class Dems2020::Cli
         puts "2020 DEMOCRATIC CANDIDATES FOR PRESIDENT"
         puts ""
         puts "========================================"
-        Dems2020::Cli.list_candidates
-        puts "========================================"
-        puts ""
-        puts "Please enter the number of the candidate which you like to learn more about: "
+       
+        list_candidates
         get_candidate
         print_candidate_info
         list_or_exit
     end
 
+    def self.list_candidates
+        Dems2020::Candidate.all.each_with_index do |candidate, index|
+            puts "#{index + 1}. #{candidate.name}"
+        end
+    end
+
     def self.get_candidate
-        input_number = gets.to_i 
+        puts "========================================"
+        puts ""
+        puts "Please enter the number of the candidate which you like to learn more about: "
+        input_number = gets
         @@selected_candidate = Dems2020::Candidate.find_by_index(input_number)
     end
 
@@ -36,6 +41,7 @@ class Dems2020::Cli
         puts ""
         puts "To return to the candidate list enter 'list'"
         puts "To exit enter 'exit'"
+       
         input = gets.strip
         if input == 'list'
             start
@@ -73,11 +79,5 @@ class Dems2020::Cli
         puts @@selected_candidate.news2
         puts ""
         puts @@selected_candidate.news3
-        
-
     end
-
-
-
-
 end

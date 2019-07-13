@@ -1,8 +1,6 @@
 # Dems2020
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/Dems2020`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This app displays a list of Democratic candidates for president for the upcoming the 2020 election. The candidates are presented in a numbered list, the user then selects a candidate by entering the list number. A summary of the candidate's information is then shown to the user including a quote from the candidate, a campaign platform and experience summary, and recent news headlines. The user is then given the option to return to the list of candidates or exit the program. 
 
 ## Development
 
@@ -32,7 +30,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/Dems2020.
+Bug reports and pull requests are welcome on GitHub at https://github.com/nbaugh1/Dems2020.
 
 ## License
 
