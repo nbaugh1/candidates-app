@@ -10,7 +10,7 @@ class Dems2020::CLI
         system 'clear'
         puts ""
         puts ""
-        puts "2020 DEMOCRATIC CANDIDATES FOR PRESIDENT"
+        puts "2020 #{'DEMOCRATIC'.blue} CANDIDATES FOR PRESIDENT"
         puts ""
         puts "========================================"
        
@@ -39,8 +39,8 @@ class Dems2020::CLI
         puts ""
         puts "================================================================"
         puts ""
-        puts "To return to the candidate list enter 'list'"
-        puts "To exit enter 'exit'"
+        puts "To return to the candidate list enter #{'list'.green}"
+        puts "To exit enter #{'exit'.red}"
        
         input = gets.strip
         if input == 'list'
@@ -57,22 +57,22 @@ class Dems2020::CLI
         system 'clear'
         puts ""
         puts ""
-        puts "You have chosen to learn more about -#{@@selected_candidate.name}-"
+        puts "You have chosen to learn more about -#{@@selected_candidate.name.blue}-"
         puts "================================================================"
         puts ""
-        puts "#{@@selected_candidate.name}'s reason for running for president in 2020:"
+        puts "#{"#{@@selected_candidate.name}'s".blue} reason for running for president in 2020:"
         puts ""
         puts "'#{@@selected_candidate.quote}' -#{@@selected_candidate.name}"
         puts ""
         puts "================================================================"
         puts ""
-        puts "Summary of #{@@selected_candidate.name}'s campaign platform and experience:"
+        puts "Summary of #{"#{@@selected_candidate.name}'s".blue} campaign platform and experience:"
         puts ""
         puts @@selected_candidate.summary
         puts ""
         puts "================================================================"
         puts ""
-        puts "Recent news about #{@@selected_candidate.name}:"
+        puts "Recent news about #{@@selected_candidate.name.blue}:"
         puts ""
         puts @@selected_candidate.news1
         puts ""
