@@ -14,11 +14,7 @@ class Dems2020::Candidate_new
         @news3 = news3
     end
 
-    def self.make_candidates
-        Dems2020::Scraper.name_list_page.css("div.mobile-columns ul li b a").each do |candidate|
-            self.new(candidate.text, candidate.attribute('href').value)
-        end
-    end
+    
     
     
     
@@ -28,7 +24,7 @@ class Dems2020::Candidate_new
     end
 
     def self.find_by_index(input_number)
-        Dems2020::Candidate.all[input_number.to_i - 1]
+        self.all[input_number.to_i - 1]
     end
 end
 

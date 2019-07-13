@@ -2,7 +2,8 @@ class Dems2020::CLI
     @@selected_candidate = nil
 
     def self.run
-        Dems2020::Scraper.scrape_names_and_profile_pages
+        #Dems2020::Scraper.scrape_names_and_profile_pages
+        Dems2020::Candidate.make_candidates
         Dems2020::Scraper.add_campaign_info
         start
     end
@@ -32,7 +33,7 @@ class Dems2020::CLI
         puts ""
         puts "Please enter the number of the candidate which you like to learn more about: "
         input_number = gets
-        @@selected_candidate = Dems2020::Candidate.find_by_index(input_number)
+        @@selected_candidate = Dems2020::Candidate.selected_candidate(input_number)
     end
 
     def self.list_or_exit

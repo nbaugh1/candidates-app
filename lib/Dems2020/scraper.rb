@@ -6,11 +6,11 @@ class Dems2020::Scraper
         Nokogiri::HTML(open("#{BASE_URL}/Democratic_presidential_nomination,_2020"))
     end
 
-    def self.scrape_names_and_profile_pages
-        name_list_page.css("div.mobile-columns ul li b a").each do |candidate|
-            Dems2020::Candidate.new(candidate.text, candidate.attribute('href').value)
-        end
-    end
+    #def self.scrape_names_and_profile_pages
+    #    name_list_page.css("div.mobile-columns ul li b a").each do |candidate|
+    #        Dems2020::Candidate.new(candidate.text, candidate.attribute('href').value)
+    #    end
+    #end
 
     def self.add_campaign_info
         Dems2020::Candidate.all.each do |candidate|
