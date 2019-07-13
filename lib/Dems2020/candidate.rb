@@ -1,12 +1,12 @@
 class Dems2020::Candidate
-    attr_accessor :name, :info_page_url, :quote, :summary, :news1, :news2, :news3
+    attr_accessor :name, :url, :quote, :summary, :news1, :news2, :news3
 
     @@all = []
 
-    def initialize (name = nil, info_page_url = nil, quote = nil, summary = nil, news1 = nil, news2 = nil, news3 = nil)
+    def initialize (name = nil, url = nil, quote = nil, summary = nil, news1 = nil, news2 = nil, news3 = nil)
         @@all << self
         @name = name
-        @info_page_url = info_page_url
+        @url = url
         @quote = quote
         @summary = summary
         @news1 = news1
@@ -20,12 +20,24 @@ class Dems2020::Candidate
         end
     end
 
+    
+
     def self.all
         @@all
     end
 
     def self.selected_candidate(input_number)
         self.all[input_number.to_i - 1]
+    end
+
+    def self.add_candidate_info(candidate)
+        candidate_info_page = Dems2020::Scraper.scrape_profile_page(candidate.url)
+        #Nokogiri::HTML(open("#{BASE_URL}#{candidate.info_page_url}"))
+            candidate.quote = candidate_info_page.css("td")[3].text
+            candidate.summary = candidate_info_page.css("p")[9..11].text
+            candidate.news1 = candidate_info_page.css("li.panel ul")[0].text
+            candidate.news2 = candidate_info_page.css("li.panel ul")[1].text
+            candidate.news3 = candidate_info_page.css("li.panel ul")[2].text
     end
 end
 
