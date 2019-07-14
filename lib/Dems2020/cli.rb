@@ -15,7 +15,8 @@ class Dems2020::CLI
         puts "========================================"
        
         list_candidates
-        get_candidate
+        get_candidate_selection
+        select_candidate
         print_candidate_info
         list_or_exit
     end
@@ -26,14 +27,29 @@ class Dems2020::CLI
         end
     end
 
-    def self.get_candidate
+    def self.get_candidate_selection
         puts "========================================"
         puts ""
-        puts "Please enter the number of the candidate which you like to learn more about: "
-        input_number = gets
-        @@selected_candidate = Dems2020::Candidate.selected_candidate(input_number)
+        puts "Please enter the number of the candidate which you like to learn more about, or enter #{'exit'.red} to exit: "
+        @input_number = gets.strip
+        check_input
+    end
+
+    def self.check_input
+        if @input_number.downcase == 'exit'
+            puts "Thanks! Goodbye."
+            exit
+        elsif @input_number.to_i > Dems2020::Candidate.all.length || @input_number.to_i <= 0
+            start
+        end
+    end
+
+    def self.select_candidate
+        @@selected_candidate = nil
+        @@selected_candidate = Dems2020::Candidate.selected_candidate(@input_number)
         Dems2020::Candidate.add_candidate_info(@@selected_candidate)
     end
+             
 
     def self.list_or_exit
         puts ""
@@ -47,6 +63,7 @@ class Dems2020::CLI
             start
         elsif input == 'exit'
             puts "Thanks! Goodbye"
+            exit
         else
             puts "Sorry, I didn't understand that"
             list_or_exit
